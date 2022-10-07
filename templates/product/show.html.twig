@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{products.name}} details{% endblock %}
+
+{% block body %}
+{% if products %}
+<div class="row my-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card mb-3">
+            {% if products.image %}
+            <img style="height: 380px;" src="{{ asset('uploads/'~products.image) }}" alt="{{products.name}}"
+                class="card-img-top">
+            {% else %}
+            <img style="height: 380px;" src="{{ asset('uploads/noImage.png') }}" alt="{{products.name}}"
+                class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{products.name}}</h5>
+                <p class="card-text">{{products.description}}</p>
+                <h5 class="price"><span class="text text-danger">{{products.price}}€</span></h5>
+                <h5><span class="text text-success">{{products.category}}</span></h5>
+                <a href="{{ path('order_store', {product: products.id}) }}" class="form-control btn btn-primary position-relative mt-4">Order now</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-info">No product found!</div>
+{% endif %}
+{% endblock %}
